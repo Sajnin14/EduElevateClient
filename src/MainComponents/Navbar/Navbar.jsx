@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import './Navbar.css'
 
 const Navbar = () => {
-    const links = <div className="flex flex-col lg:flex-row gap-3 items-center text-lg font-semibold">
+    const links = <div className="flex flex-col lg:flex-row gap-3 items-center font-semibold">
         <NavLink to='/'>Home</NavLink>
         <NavLink to='/services'>Services</NavLink>
     </div> 
@@ -41,11 +41,11 @@ const Navbar = () => {
                            
                         </ul>
                     </div>
-                    <Link to='/' className="btn-lg text-lg flex flex-col items-center">
-                      <img src="https://i.ibb.co.com/c1m6Lv6/judicial-quill-writing-on-open-book-judgment-certificate-or-police-document-education-book-quill-tem.jpg" className="h-2/3" />
+                    <Link to='/' className="flex flex-col items-center">
+                      <img src="https://i.ibb.co.com/c1m6Lv6/judicial-quill-writing-on-open-book-judgment-certificate-or-police-document-education-book-quill-tem.jpg" className="h-full w-16" />
                       {/* <p className=" font-bold">EduElevate</p> */}
-                      <p className="h-1/3 font-bold text-[#1E4463]">EduElevate</p>
                     </Link>
+                    <p className="hidden lg:block text-lg font-bold text-[#1E4463]">EduElevate</p>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
