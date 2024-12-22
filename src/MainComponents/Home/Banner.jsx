@@ -1,6 +1,7 @@
 import { easeOut } from "motion";
 import { motion } from "motion/react"
 const Banner = () => {
+    
     return (
         <div>
             <div className="hero min-h-screen">
