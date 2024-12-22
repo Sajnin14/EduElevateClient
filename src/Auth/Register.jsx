@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import UseAuth from "../AuthProvider/UseAuth";
 
 const Register = () => {
-    const { setUser, createUser, googleSignIn} = UseAuth();
+    const { setUser, createUser, googleSignIn, updateUser} = UseAuth();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const handleRegister = e => {
@@ -15,8 +15,6 @@ const Register = () => {
         const photo = form.get("photo");
         const email = form.get("email");
         const password = form.get("password");
-
-        console.log(name, photo, email, password);
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
@@ -28,11 +26,16 @@ const Register = () => {
         createUser(email, password)
         .then(res => {
             setUser(res.user);
-            toast('successfully created new user', {position: "top-center"});
-            console.log(res.user);
-            navigate('/');
+            toast.success('successfully created new user', {position: "top-center"});
+            updateUser({displayName: name, photoURL : photo})
+            .then(res => console.log(res.user))
+            .catch(err => console.log(err.code))
+            setTimeout(() => {
+                navigate('/');
+            }, 1000);
+            
         })
-        .catch(err => toast(err.message))
+        .catch(err => toast.error(err.message))
     }
 
 
@@ -40,10 +43,8 @@ const Register = () => {
         googleSignIn()
         .then(res => {
             setUser(res.user);
-            toast.success('successfully register with google', 
-                {position: 'top-center'}
-            );
-            console.log(res.user);
+            toast.success('successfully register with google');
+            // console.log(res.user);
             navigate('/');
         })
     }

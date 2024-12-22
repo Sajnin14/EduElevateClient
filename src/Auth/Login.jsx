@@ -16,10 +16,13 @@ const Login = () => {
         // console.log(email, password);
         loginUser(email, password)
             .then(res => {
+                toast.success('successfully login', { position: 'top-center' });
                 setUser(res.user);
-                toast('successfully login', { position: 'top-center' });
                 console.log(res.user);
-                navigate('/');
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
+                
             })
             .catch(error => toast.error(error.message, { position: 'top-center' }))
     }
@@ -29,7 +32,7 @@ const Login = () => {
         googleSignIn()
             .then(res => {
                 setUser(res.user);
-                toast.success('successfully register with google',
+                toast('successfully register with google',
                     { position: 'top-center' }
                 );
                 console.log(res.user);

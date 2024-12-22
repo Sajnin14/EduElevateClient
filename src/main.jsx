@@ -11,6 +11,8 @@ import ErrorPage from './MainComponents/ErrorPage';
 import AuthProvider from './AuthProvider/AuthProvider';
 import Register from './Auth/Register';
 import Login from './Auth/Login';
+import AddServices from './Pages/AddServices';
+import PrivateRoute from './AuthProvider/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
+      },
+      {
+        path: '/addServices',
+        element: <PrivateRoute><AddServices></AddServices></PrivateRoute>
       },
       {
         path: '/auth/login',

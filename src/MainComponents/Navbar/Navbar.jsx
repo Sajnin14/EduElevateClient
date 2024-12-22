@@ -5,9 +5,16 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 
 const Navbar = () => {
     const { user, logOut } = UseAuth();
-    const links = <div className="flex flex-col lg:flex-row gap-3 items-center font-semibold">
+    const links = <div className="flex flex-col lg:flex-row gap-3 items-center font-semibold mr-2">
         <NavLink to='/'>Home</NavLink>
         <NavLink to='/services'>Services</NavLink>
+    </div>
+
+    const subLink = <div className="flex flex-col gap-3 font-semibold overflow-visible absolute z-50 bg-base-100 p-3 rounded-xl">
+        <NavLink to='/addServices'>Add Service</NavLink>
+        <NavLink to='/manageServices'>Manage Service</NavLink>
+        <NavLink to='/bookedServices'>Booked-Services</NavLink>
+        <NavLink to='/serviceToDo'>Service-To-Do</NavLink>
     </div>
 
 
@@ -34,13 +41,14 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {links}
-                            {/* <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </li> */}
+                            {
+                                user && user?.email && <li>
+                                    <a>Dashboard</a>
+                                    <ul className="p-2">
+                                        {subLink}
+                                    </ul>
+                                </li>
+                            }
 
                         </ul>
                     </div>
@@ -51,17 +59,19 @@ const Navbar = () => {
                     <p className="hidden lg:block text-lg font-bold text-[#1E4463]">EduElevate</p>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 relative">
                         {links}
-                        {/* <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </details>
-                        </li> */}
+                        {
+                            user && user?.email && <li>
+                                <details>
+                                    <summary className="font-semibold">Dashboard</summary>
+                                    <ul className="p-2">
+                                        {subLink}
+                                    </ul>
+                                </details>
+                            </li>
+
+                        }
 
                     </ul>
                 </div>
@@ -80,7 +90,7 @@ const Navbar = () => {
 
                     {/* for login and log-out button */}
                     {
-                        user?.email ? <button onClick={()=> logOut()} className="border border-[#EDA655] py-1 px-2 rounded-lg">Log-out</button> : <NavLink to='/auth/login' className="border border-[#EDA655] py-1 px-2 rounded-lg">Login</NavLink>
+                        user?.email ? <button onClick={() => logOut()} className="border border-[#EDA655] py-1 px-2 rounded-lg">Log-out</button> : <NavLink to='/auth/login' className="border border-[#EDA655] py-1 px-2 rounded-lg">Login</NavLink>
                     }
 
                 </div>
