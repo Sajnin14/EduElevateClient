@@ -1,31 +1,38 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
+import axios from "axios";
 
 
-const BookedServices = () => {
-    const [bookedServices, setBookesdServices] = useState([]);
+const ServiceToDo = () => {
+
+    const [serviceToDo, setServiceToDo] = useState([]);
     const { user } = UseAuth();
     useEffect(() => {
-        fetch(`http://localhost:5000/purchaseServices?email=${user.email}`)
+        fetch(`http://localhost:5000/purchaseServices/service/${user.email}`)
             .then(res => res.json())
             .then(data => {
-                setBookesdServices(data);
+                setServiceToDo(data);
                 console.log(data);
             })
     }, [user.email])
 
-    if (!bookedServices.length) {
-        return (
-            <div className="w-11/12 mx-auto h-72 bg-gray-300 flex items-center justify-center">
-                <p className="text-2xl font-bold text-red-700">No Services added by you</p>
-            </div>
-        )
-    }
 
+    const handleStatus = (e, id) => {
+        e.preventDefault();
+        const value = e.target.value;
+        console.log(value, id);
+        const data = {
+            serviceStatus: value
+        }
+
+        axios.patch(`http://localhost:5000/purchaseServices/${id}`, data)
+        .then(res => {
+            console.log(res.data);
+        })
+    }
     return (
         <div>
-            <h3 className="text-3xl font-bold text-center my-5">Total Added Books: {bookedServices.length}</h3>
-
+            <h3 className="text-3xl font-bold text-center my-5">Total Response to your Service: {serviceToDo.length}</h3>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -33,7 +40,8 @@ const BookedServices = () => {
                         <tr>
                             <th>index</th>
                             <th>Book Details</th>
-                            <th>Date</th>
+                            <th>Purchase Details</th>
+                            <th>Delivery Details</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -41,7 +49,7 @@ const BookedServices = () => {
                         {/* row 1 */}
 
                         {
-                            bookedServices.map((service, idx) => <tr key={idx}>
+                            serviceToDo.map((service, idx) => <tr key={idx}>
                                 <th>{idx + 1}</th>
                                 <td>
                                     <div className="flex items-center gap-3">
@@ -60,13 +68,22 @@ const BookedServices = () => {
                                     </div>
                                 </td>
                                 <td>
-                                    {service.area}
+                                    <p>Name: {service.userName}</p>
+                                    <p>{service.userEmail}</p>
+                                </td>
+                                <td>
+                                    Address: {service.address}
                                     <br />
-                                    <span className="badge badge-ghost badge-sm">{service.serviceDate}</span>
+                                    <span className="badge badge-ghost badge-sm">Date: {service.serviceDate}</span>
                                 </td>
 
                                 <th>
-                                    <span className="badge badge-ghost badge-sm">{service.serviceStatus}</span>
+                                    <select onChange={(e) => handleStatus(e, service._id)} className="select select-bordered select-xs w-full max-w-xs">
+                                        <option disabled selected>Pending</option>
+                                        <option>Pending</option>
+                                        <option>Working</option>
+                                        <option>Completed(delivered)</option>
+                                    </select>
                                 </th>
                             </tr>)
                         }
@@ -80,4 +97,4 @@ const BookedServices = () => {
     );
 };
 
-export default BookedServices;
+export default ServiceToDo;

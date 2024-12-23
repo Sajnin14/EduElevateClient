@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
@@ -9,12 +9,16 @@ const ManageServices = () => {
     const [manageServices, setManageServices] = useState([]);
     const { user } = UseAuth();
 
-    fetch(`http://localhost:5000/allServices?email=${user.email}`)
+    useEffect(() => {
+        fetch(`http://localhost:5000/allServices?email=${user.email}`)
         .then(res => res.json())
         .then(data => {
             setManageServices(data);
             console.log(data);
         })
+    },[user.email])
+
+    
     return (
         <div>
             <h3 className="text-3xl font-bold text-center my-5">Total Added Books: {manageServices.length}</h3>
