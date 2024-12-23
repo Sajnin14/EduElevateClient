@@ -13,6 +13,8 @@ import Register from './Auth/Register';
 import Login from './Auth/Login';
 import AddServices from './Pages/AddServices';
 import PrivateRoute from './AuthProvider/PrivateRoute';
+import AllServices from './Pages/AllServices';
+import SingleService from './Pages/SingleService';
 
 const router = createBrowserRouter([
   {
@@ -24,9 +26,19 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home></Home>
       },
+    
       {
         path: '/addServices',
         element: <PrivateRoute><AddServices></AddServices></PrivateRoute>
+      },
+      {
+        path: '/services',
+        element: <AllServices></AllServices>,
+        loader: () => fetch('http://localhost:5000/allServices')
+      },
+      {
+        path: '/service/:id',
+        element: <PrivateRoute><SingleService></SingleService></PrivateRoute>
       },
       {
         path: '/auth/login',

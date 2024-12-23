@@ -2,6 +2,7 @@ import axios from "axios";
 
 import UseAuth from "../AuthProvider/UseAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddServices = () => {
 
@@ -10,6 +11,7 @@ const AddServices = () => {
     const providerEmail = user.email;
     const providerPhoto = user.photoURL;
     
+    const navigate = useNavigate();
 
     const handleAddService = event => {
         event.preventDefault();
@@ -35,9 +37,11 @@ const AddServices = () => {
                 showConfirmButton: false,
                 timer: 1500
               });
+              navigate('/services')
+
         })
     }
-    
+
     return (
         
             <div className="px-9 md:px-40 rounded-xl">
