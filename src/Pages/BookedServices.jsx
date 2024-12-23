@@ -1,18 +1,44 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const BookedServices = () => {
     const [bookedServices, setBookesdServices] = useState([]);
-    const { user } = UseAuth();
+    const { user, logOut } = UseAuth();
+    const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://localhost:5000/purchaseServices?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setBookesdServices(data);
-                console.log(data);
-            })
+        // fetch(`http://localhost:5000/purchaseServices?email=${user.email}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setBookesdServices(data);
+        //         console.log(data);
+        //     })
+
+        axios.get(`http://localhost:5000/purchaseServices?email=${user.email}`, {withCredentials: true})
+        .then(res => {
+            setBookesdServices(res.data);
+        })
+
     }, [user.email])
+
+    useEffect(() =>{
+        axios.interceptors.response.use(response =>{
+           return response;
+        }, error => {
+            console.log('error from interceptor');
+            if(error.status === 401 || error.status === 403){
+               logOut()
+               .then(() => {})
+               .catch(() => {console.log('error khao mia')})
+               
+               navigate('/auth/login');
+               
+            }
+           return Promise.reject(error);
+        })
+    },[logOut, navigate])
 
     if (!bookedServices.length) {
         return (

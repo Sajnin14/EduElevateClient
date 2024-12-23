@@ -1,20 +1,38 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const ServiceToDo = () => {
 
     const [serviceToDo, setServiceToDo] = useState([]);
-    const { user } = UseAuth();
+    const { user, logOut } = UseAuth();
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        fetch(`http://localhost:5000/purchaseServices/service/${user.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setServiceToDo(data);
-                console.log(data);
-            })
+        axios.get(`http://localhost:5000/purchaseServices/service/${user.email}`, {withCredentials: true})
+        .then(res => {
+            setServiceToDo(res.data)
+        })
     }, [user.email])
+
+    useEffect(() =>{
+        axios.interceptors.response.use(response =>{
+           return response;
+        }, error => {
+            console.log('error from interceptor');
+            if(error.status === 401 || error.status === 403){
+               logOut()
+               .then(() => {})
+               .catch(() => {console.log('error khao mia')})
+               
+               navigate('/auth/login');
+               
+            }
+           return Promise.reject(error);
+        })
+    },[logOut, navigate])
 
 
     const handleStatus = (e, id) => {
@@ -79,7 +97,7 @@ const ServiceToDo = () => {
 
                                 <th>
                                     <select onChange={(e) => handleStatus(e, service._id)} className="select select-bordered select-xs w-full max-w-xs">
-                                        <option disabled selected>Pending</option>
+                                        <option defaultValue='pending'>Pending</option>
                                         <option>Pending</option>
                                         <option>Working</option>
                                         <option>Completed(delivered)</option>
