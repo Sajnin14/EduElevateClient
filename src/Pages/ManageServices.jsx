@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
+import axios from "axios";
 
 
 const ManageServices = () => {
@@ -10,11 +11,16 @@ const ManageServices = () => {
     const { user } = UseAuth();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/allServices?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => {
-            setManageServices(data);
-            console.log(data);
+        // fetch(`http://localhost:5000/allServices?email=${user.email}`)
+        // .then(res => res.json())
+        // .then(data => {
+        //     setManageServices(data);
+        //     console.log(data);
+        // })
+
+        axios.get(`http://localhost:5000/allServices?email=${user.email}`, {withCredentials: true})
+        .then(res => {
+            setManageServices(res.data);
         })
     },[user.email])
 
