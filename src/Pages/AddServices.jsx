@@ -1,5 +1,15 @@
+import axios from "axios";
+
+import UseAuth from "../AuthProvider/UseAuth";
+import Swal from "sweetalert2";
 
 const AddServices = () => {
+
+    const {user} = UseAuth();
+    const providername = user.displayName;
+    const providerEmail = user.email;
+    const providerPhoto = user.photoURL;
+    
 
     const handleAddService = event => {
         event.preventDefault();
@@ -12,8 +22,22 @@ const AddServices = () => {
         const price = form.price.value;
         const description = form.description.value;
 
-        console.log(cover, bookName, type, author, area, price, description);
+        const serviceProvide = {cover, bookName, type, author, area, price, description, providername, providerEmail, providerPhoto}
+
+
+        axios.post('http://localhost:5000/allServices', serviceProvide)
+        .then(res => {
+            console.log(res.data);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your book has been updated",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        })
     }
+    
     return (
         
             <div className="px-9 md:px-40 rounded-xl">
@@ -71,7 +95,8 @@ const AddServices = () => {
                             </label>
                             <select id="options" name='area' className="input input-bordered" required>
                                 <option value="">select area</option>
-                                <option value="dhaka">Dhaka</option>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="home delivery">home delivery</option>
                                 <option value="rangpur">Rangpur</option>
                                 <option value="shylhet">Shylhet</option>
                                 <option value="rajshahi">Rajshahi</option>
