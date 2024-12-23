@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Services = ({ service }) => {
 
     const description = service.description;
-    const maxLength = 97;
+    const maxLength = 100;
     const finalDes =
         description?.length > maxLength ? description.substring(0, 97) + '...' : description;
     return (
