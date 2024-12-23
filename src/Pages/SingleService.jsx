@@ -1,11 +1,51 @@
 
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import UseAuth from "../AuthProvider/UseAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const SingleService = () => {
+    const navigate = useNavigate();
     const loader = useLoaderData();
     const { user } = UseAuth();
     console.log({ user });
+    
+
+
+    console.log(loader._id);
+    const handlePurchase = e => {
+        e.preventDefault();
+        const serviceDate = e.target.date.value;
+        const address = e.target.address.value;
+
+        const purchaseInfo = {
+            userName: user.displayName,
+            userEmail: user.email,
+            serviceId: loader._id,
+            serviceName : loader.name,
+            serviceImage : loader.cover,
+            providerEmail : loader.providerEmail,
+            providername : loader.providername,
+            price: loader.price,
+            serviceStatus: 'Pending',
+            serviceDate,
+            address
+        }
+
+        console.log(purchaseInfo);
+        axios.post('http://localhost:5000/purchaseServices', purchaseInfo)
+        .then(res =>{
+            console.log(res.data);
+            Swal.fire({
+                icon: "success",
+                title: "Your purchase hase been saved",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            navigate('/services');
+         })
+
+    }
     return (
         <div>
             <p className="font-bold text-2xl mb-5 text-center">Book Provider Information: </p>
@@ -52,7 +92,7 @@ const SingleService = () => {
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="bookNowModal" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <form>
+                    <form onSubmit={handlePurchase}>
 
                         {/* first row */}
                         <div className="md:flex gap-3">
@@ -125,7 +165,7 @@ const SingleService = () => {
                                 <label className="label">
                                     <span className="label-text">Service Taking Date</span>
                                 </label>
-                                <input type="date" name='userName' placeholder="Enter Your books Taking Date"
+                                <input type="date" name='date' placeholder="Enter Your books Taking Date"
                                     className="input input-bordered" required />
                             </div>
                         </div>
@@ -135,12 +175,11 @@ const SingleService = () => {
 
                             <div className="form-control w-full md:w-1/2">
                                 <label className="label">
-                                    <span className="label-text">Special instruction</span>
+                                    <span className="label-text">Address</span>
                                 </label>
-                                <textarea name="special" placeholder="Any Special instruction" className="input input-bordered"></textarea>
 
-                                {/* <input type="date" name='userName' placeholder="Enter Your books Taking Date"
-                                    className="input input-bordered" required /> */}
+                                <input type="text" name='address' placeholder="Enter Your address"
+                                    className="input input-bordered" required />
                             </div>
                             <div className="form-control w-full md:w-1/2">
                                 <label className="label">
@@ -161,8 +200,8 @@ const SingleService = () => {
 
 
                     </form>
-                    <div className="modal-action">
-                        <form method="dialog">
+                    <div className="modal-action text-center">
+                        <form method="dialog text-center">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn">Close</button>
                         </form>

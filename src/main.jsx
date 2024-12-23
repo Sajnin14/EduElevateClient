@@ -15,6 +15,8 @@ import AddServices from './Pages/AddServices';
 import PrivateRoute from './AuthProvider/PrivateRoute';
 import AllServices from './Pages/AllServices';
 import SingleService from './Pages/SingleService';
+import ManageServices from './Pages/ManageServices';
+import BookedServices from './Pages/BookedServices';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
         element: <PrivateRoute><SingleService></SingleService></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/allServices/${params.id}`),
         
+      },
+      {
+        path: '/manageServices',
+        element: <PrivateRoute><ManageServices></ManageServices></PrivateRoute>
+      },
+      {
+        path: '/bookedServices',
+        element: <PrivateRoute><BookedServices></BookedServices> </PrivateRoute>
       },
       {
         path: '/auth/login',
