@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
 import axios from "axios";
 import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
+import useTitle from "../AuthProvider/useTitle";
 
 
 const ServiceToDo = () => {
+
+    useTitle('action');
 
     const [serviceToDo, setServiceToDo] = useState([]);
     const { user } = UseAuth();

@@ -5,9 +5,12 @@ import { MdDeleteForever } from "react-icons/md";
 // import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
+import useTitle from "../AuthProvider/useTitle";
 
 
 const ManageServices = () => {
+
+    useTitle('manage');
 
     const [manageServices, setManageServices] = useState([]);
     const { user } = UseAuth();
@@ -15,34 +18,11 @@ const ManageServices = () => {
 
     useEffect(() => {
         
-        // axios.get(`http://localhost:5000/allServices?email=${user.email}`, {withCredentials: true})
-        // .then(res => {
-        //     setManageServices(res.data);
-        // })
-
         if(user){
             axiosSecure.get(`/allServices?email=${user.email}`)
             .then(res => setManageServices(res.data))
         }
     },[axiosSecure, user])
-
-    // useEffect(() =>{
-    //     axios.interceptors.response.use(response =>{
-    //        return response;
-    //     }, error => {
-    //         console.log('error from interceptor');
-    //         if(error.status === 401 || error.status === 403){
-    //            logOut()
-    //            .then(() => {})
-    //            .catch(() => {console.log('error khao mia')})
-               
-    //            navigate('/auth/login');
-               
-    //         }
-    //        return Promise.reject(error);
-    //     })
-    // },[logOut, navigate])
-
     
     return (
         <div>

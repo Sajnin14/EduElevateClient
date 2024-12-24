@@ -3,8 +3,11 @@ import axios from "axios";
 import UseAuth from "../AuthProvider/UseAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../AuthProvider/useTitle";
 
 const AddServices = () => {
+
+    useTitle('addBook');
 
     const {user} = UseAuth();
     const providername = user.displayName;

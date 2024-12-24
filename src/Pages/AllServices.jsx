@@ -1,8 +1,13 @@
 import { useLoaderData } from "react-router-dom";
 import Services from "./Services";
+import useTitle from "../AuthProvider/useTitle";
 
 
 const AllServices = () => {
+     useTitle('Books');
+    // const [loader, setloader] = useState();
+
+    // useEffect()
 
     const loader = useLoaderData();
     console.log(loader);

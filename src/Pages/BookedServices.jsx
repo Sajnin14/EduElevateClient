@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
 import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
+import useTitle from "../AuthProvider/useTitle";
 
 
 const BookedServices = () => {
+    useTitle('purchase');
     const [bookedServices, setBookesdServices] = useState([]);
     const { user } = UseAuth();
     const axiosSecure = useAxiosSecure();
