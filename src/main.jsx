@@ -19,6 +19,7 @@ import ManageServices from './Pages/ManageServices';
 import BookedServices from './Pages/BookedServices';
 import ServiceToDo from './Pages/ServiceToDo';
 import ThemeWrapper from './Theme/ThemeWrapper';
+import UpdateService from './Pages/UpdateService';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
       {
         path: '/manageServices',
         element: <PrivateRoute><ManageServices></ManageServices></PrivateRoute>
+      },
+      {
+        path: '/updateService/:id',
+        element: <PrivateRoute><UpdateService></UpdateService></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/allServices/${params.id}`, {credentials: 'include'})
       },
       {
         path: '/bookedServices',

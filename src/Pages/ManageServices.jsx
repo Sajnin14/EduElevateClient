@@ -6,6 +6,7 @@ import { MdDeleteForever } from "react-icons/md";
 // import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 import useTitle from "../AuthProvider/useTitle";
+import { Link } from "react-router-dom";
 
 
 const ManageServices = () => {
@@ -68,7 +69,7 @@ const ManageServices = () => {
                             </td>
                             
                             <th className="flex gap-4 items-center">
-                                <button><FiEdit className="text-xl"></FiEdit> </button>
+                                <Link to={`/updateService/${service._id}`}>                                <button><FiEdit className="text-xl"></FiEdit> </button> </Link>
                                 <button><MdDeleteForever className="text-red-600 font-bold text-2xl"></MdDeleteForever> </button>
                             </th>
                         </tr>)
