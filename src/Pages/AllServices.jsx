@@ -3,7 +3,9 @@ import Services from "./Services";
 
 
 const AllServices = () => {
+
     const loader = useLoaderData();
+    console.log(loader);
 
     return (
         <div className="mx-auto">

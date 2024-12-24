@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 
 
 const BookedServices = () => {
     const [bookedServices, setBookesdServices] = useState([]);
-    const { user, logOut } = UseAuth();
-    const navigate = useNavigate();
+    const { user } = UseAuth();
+    const axiosSecure = useAxiosSecure();
     useEffect(() => {
         // fetch(`http://localhost:5000/purchaseServices?email=${user.email}`)
         //     .then(res => res.json())
@@ -16,29 +15,34 @@ const BookedServices = () => {
         //         console.log(data);
         //     })
 
-        axios.get(`http://localhost:5000/purchaseServices?email=${user.email}`, {withCredentials: true})
-        .then(res => {
-            setBookesdServices(res.data);
-        })
+        // axios.get(`http://localhost:5000/purchaseServices?email=${user.email}`, {withCredentials: true})
+        // .then(res => {
+        //     setBookesdServices(res.data);
+        // })
 
-    }, [user.email])
+        if (user) {
+            axiosSecure.get(`/purchaseServices/service/${user.email}`)
+                .then(res => setBookesdServices(res.data))
+        }
+    }, [axiosSecure, user])
 
-    useEffect(() =>{
-        axios.interceptors.response.use(response =>{
-           return response;
-        }, error => {
-            console.log('error from interceptor');
-            if(error.status === 401 || error.status === 403){
-               logOut()
-               .then(() => {})
-               .catch(() => {console.log('error khao mia')})
+
+    // useEffect(() =>{
+    //     axios.interceptors.response.use(response =>{
+    //        return response;
+    //     }, error => {
+    //         console.log('error from interceptor');
+    //         if(error.status === 401 || error.status === 403){
+    //            logOut()
+    //            .then(() => {})
+    //            .catch(() => {console.log('error khao mia')})
                
-               navigate('/auth/login');
+    //            navigate('/auth/login');
                
-            }
-           return Promise.reject(error);
-        })
-    },[logOut, navigate])
+    //         }
+    //        return Promise.reject(error);
+    //     })
+    // },[logOut, navigate])
 
     if (!bookedServices.length) {
         return (
@@ -50,7 +54,7 @@ const BookedServices = () => {
 
     return (
         <div>
-            <h3 className="text-3xl font-bold text-center my-5">Total Added Books: {bookedServices.length}</h3>
+            <h3 className="text-3xl font-bold text-center my-5">Total Booked Books: {bookedServices.length}</h3>
 
             <div className="overflow-x-auto">
                 <table className="table">
@@ -60,6 +64,7 @@ const BookedServices = () => {
                             <th>index</th>
                             <th>Book Details</th>
                             <th>Date</th>
+                            <th>Provider Info</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -89,6 +94,11 @@ const BookedServices = () => {
                                     {service.area}
                                     <br />
                                     <span className="badge badge-ghost badge-sm">{service.serviceDate}</span>
+                                </td>
+
+                                <td>
+                                   <p> {service.providername}</p>
+                                   <p>{service.providerEmail}</p>
                                 </td>
 
                                 <th>

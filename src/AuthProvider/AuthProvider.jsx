@@ -7,16 +7,38 @@ import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+
     
+    const googleProvider = new GoogleAuthProvider();
+
+    
+
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
+    // states for theme controller
+    const [theme, setTheme] = useState('light');
+    const [themeActive, setThemeActive] = useState(true);
+
+    //  code for theme changing
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+        setThemeActive(theme === "light");
+      }, [theme]);
+    
+      
+      const changeTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+      };
+
+
     const createUser = (email, password) => {
         setLoading(true);
-       return createUserWithEmailAndPassword(auth, email, password);
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const loginUser = (email, password) => {
@@ -45,25 +67,25 @@ const AuthProvider = ({children}) => {
     useEffect(() => {
         const stateChanged = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            if(currentUser?.email){
-                const user = {email: currentUser.email};
-                axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
-                .then(res => {
-                    console.log(res.data);
-                    setLoading(false);
-                })
+            if (currentUser?.email) {
+                const user = { email: currentUser.email };
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                        setLoading(false);
+                    })
             }
 
-            else{
+            else {
                 axios.post('http://localhost:5000/logout', {}, {
                     withCredentials: true
                 })
-                .then(res => {
-                    console.log(res.data);
-                    setLoading(false);
-                })
+                    .then(res => {
+                        console.log(res.data);
+                        setLoading(false);
+                    })
             }
-            
+
             return () => {
                 return stateChanged();
             }
@@ -80,12 +102,14 @@ const AuthProvider = ({children}) => {
         logOut,
         updateUser,
         loading,
-        
+        changeTheme,
+        theme,
+        themeActive
 
     }
     return (
         <AuthContext.Provider value={authValue}>
-           {children}
+            {children}
         </AuthContext.Provider>
     );
 };

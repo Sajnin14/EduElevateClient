@@ -8,9 +8,14 @@ export default {
   ],
   theme: {
     extend: {},
+    dark: {
+      'color' : 'white'
+   }
   },
   plugins: [
     daisyui
   ],
+
+  
 }
 

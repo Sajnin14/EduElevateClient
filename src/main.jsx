@@ -18,6 +18,7 @@ import SingleService from './Pages/SingleService';
 import ManageServices from './Pages/ManageServices';
 import BookedServices from './Pages/BookedServices';
 import ServiceToDo from './Pages/ServiceToDo';
+import ThemeWrapper from './Theme/ThemeWrapper';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home></Home>
       },
-    
+
       {
         path: '/addServices',
         element: <PrivateRoute><AddServices></AddServices></PrivateRoute>
@@ -42,8 +43,8 @@ const router = createBrowserRouter([
       {
         path: '/service/:id',
         element: <PrivateRoute><SingleService></SingleService></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/allServices/${params.id}`),
-        
+        loader: ({ params }) => fetch(`http://localhost:5000/allServices/${params.id}`),
+
       },
       {
         path: '/manageServices',
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider><RouterProvider router={router} /></AuthProvider>
+    <AuthProvider>
+      <ThemeWrapper>
+        <RouterProvider router={router} />
+      </ThemeWrapper>
+    </AuthProvider>
   </StrictMode>,
 )
