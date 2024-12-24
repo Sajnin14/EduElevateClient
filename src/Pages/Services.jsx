@@ -8,7 +8,7 @@ const Services = ({ service }) => {
     const finalDes =
         description?.length > maxLength ? description.substring(0, 97) + '...' : description;
     return (
-        <div key={service._id} className="flex gap-4 bg-base-100 shadow-xl p-3">
+        <div key={service._id} className="flex gap-4 bg-base-100 shadow-xl p-3 mb-5">
             <figure>
                 <img
                     src={service.cover} className="w-56 h-full rounded-lg" />

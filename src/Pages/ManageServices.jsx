@@ -23,7 +23,7 @@ const ManageServices = () => {
 
         if (user) {
             axiosSecure.get(`/allServices?email=${user.email}`)
-                .then(res => setManageServices(res.data))
+                .then(res => setManageServices(res.data.result))
         }
     }, [axiosSecure, user])
 
