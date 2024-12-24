@@ -39,8 +39,7 @@ const UpdateService = () => {
             if (result.isConfirmed) {
 
                 axios.patch(`http://localhost:5000/allServices/${loader._id}`, updatedata)
-                    .then(res => {
-                        console.log(res.data);
+                    .then(() => {
                         Swal.fire({
                             title: "Updated!",
                             text: "Your services has been updated.",
