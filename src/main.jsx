@@ -20,6 +20,8 @@ import BookedServices from './Pages/BookedServices';
 import ServiceToDo from './Pages/ServiceToDo';
 import ThemeWrapper from './Theme/ThemeWrapper';
 import UpdateService from './Pages/UpdateService';
+import Academic from './Extra/Academic';
+import Skill from './Extra/Skill';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +66,15 @@ const router = createBrowserRouter([
         path: '/serviceToDo',
         element: <PrivateRoute><ServiceToDo></ServiceToDo></PrivateRoute>
       },
+      {
+        path: '/academic',
+        element: <Academic></Academic>
+      },
+      {
+        path: '/skill',
+        element: <Skill></Skill>
+      },
+
       {
         path: '/auth/login',
         element: <Login></Login>

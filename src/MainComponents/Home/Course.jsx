@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Course = () => {
     return (
@@ -33,7 +34,7 @@ const Course = () => {
                             </ul>
                         </div>
                         <div className="card-actions justify-center">
-                            <button className="btn bg-[#EDA655] font-semibold border-none">Explore More</button>
+                            <Link to='/skill'><button className="btn bg-[#EDA655] font-semibold border-none">Explore More</button> </Link>
                         </div>
                     </div>
                 </div>
@@ -65,7 +66,8 @@ const Course = () => {
                             </ul>
                         </div>
                         <div className="card-actions justify-center">
-                            <button className="btn bg-[#EDA655] font-semibold border-none">Explore More</button>
+                            <Link to='/academic'><button className="btn bg-[#EDA655] font-semibold border-none">Explore More</button> </Link>
+                            
                         </div>
                     </div>
                 </div>
