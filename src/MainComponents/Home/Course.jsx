@@ -5,9 +5,9 @@ const Course = () => {
         <div>
             <h3 className="font-bold text-3xl my-2 text-center text-[#1E4463]">Our Courses</h3>
             <p className='italic text-center'>Learn, Grow, Succeed – Courses Crafted for Your Journey!</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 my-14">
 
-            <div className="card image-full shadow-xl">
+            <div className="w-5/6 mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 my-14">
+                <div className="card image-full shadow-xl">
                     <figure>
                         <img
                             src="https://i.ibb.co.com/7X7TSPL/image-750x415-622ef3e4d8a6c.jpg"
@@ -67,7 +67,7 @@ const Course = () => {
                         </div>
                         <div className="card-actions justify-center">
                             <Link to='/academic'><button className="btn bg-[#EDA655] font-semibold border-none">Explore More</button> </Link>
-                            
+
                         </div>
                     </div>
                 </div>

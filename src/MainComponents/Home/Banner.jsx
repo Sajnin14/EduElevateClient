@@ -3,7 +3,6 @@ import { motion } from "motion/react"
 const Banner = () => {
 
     return (
-        <div>
             <div className="hero">
                 <div className="hero-content gap-4 flex-col lg:flex-row-reverse">
                     <div className="flex-1 pb-4">
@@ -34,7 +33,6 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 

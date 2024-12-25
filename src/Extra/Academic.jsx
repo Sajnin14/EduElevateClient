@@ -10,6 +10,8 @@ const Academic = () => {
                 <div className="w-2/3 md:1/2 mx-auto">
                     <Lottie animationData={academicLottie}></Lottie>
                 </div>
+
+                
             </div>
     );
 };

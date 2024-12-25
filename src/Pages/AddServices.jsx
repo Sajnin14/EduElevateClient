@@ -30,7 +30,7 @@ const AddServices = () => {
         const serviceProvide = {cover, bookName, type, author, area, price, description, providername, providerEmail, providerPhoto}
 
 
-        axios.post('http://localhost:5000/allServices', serviceProvide)
+        axios.post('http://localhost:5000/allServices', serviceProvide, {withCredentials: true})
         .then(res => {
             console.log(res.data);
             Swal.fire({

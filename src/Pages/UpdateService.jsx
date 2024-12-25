@@ -1,12 +1,15 @@
-import axios from "axios";
+// import axios from "axios";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
+import UseAuth from "../AuthProvider/UseAuth";
 
 
 const UpdateService = () => {
-
+    const { user } = UseAuth();
     const loader = useLoaderData();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
     // console.log(loader);
 
     const handleUpdateService = (e) => {
@@ -20,8 +23,6 @@ const UpdateService = () => {
         const area = form.area.value;
         const price = form.price.value;
         const description = form.description.value;
-
-        console.log(cover, bookName, author, type, area, price, description);
 
         const updatedata = {
             cover, bookName, author, type, area, price, description
@@ -38,15 +39,29 @@ const UpdateService = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.patch(`http://localhost:5000/allServices/${loader._id}`, updatedata)
-                    .then(() => {
-                        Swal.fire({
-                            title: "Updated!",
-                            text: "Your services has been updated.",
-                            icon: "success"
-                        });
-                        navigate('/manageServices')
-                    })
+                if (user) {
+                    axiosSecure.patch(`/allServices/${loader._id}`, updatedata)
+                        .then(res => {
+                            console.log(res.data);
+                            Swal.fire({
+                                title: "Updated!",
+                                text: "Your services has been updated.",
+                                icon: "success"
+                            });
+                            navigate('/manageServices')
+
+                        })
+                }
+
+                // axios.patch(`http://localhost:5000/allServices/${loader._id}`, updatedata)
+                //     .then(() => {
+                //         Swal.fire({
+                //             title: "Updated!",
+                //             text: "Your services has been updated.",
+                //             icon: "success"
+                //         });
+                //         navigate('/manageServices')
+                //     })
             }
         });
 

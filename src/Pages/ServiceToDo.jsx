@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
-import axios from "axios";
 import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 import useTitle from "../AuthProvider/useTitle";
+import Swal from "sweetalert2";
 
 
 const ServiceToDo = () => {
@@ -50,10 +50,15 @@ const handleStatus = (e, id) => {
         serviceStatus: value
     }
 
-    axios.patch(`http://localhost:5000/purchaseServices/${id}`, data)
-        .then(res => {
-            console.log(res.data);
-        })
+    if (user) {
+        axiosSecure.patch(`/purchaseServices/${id}`, data)
+            .then(() => Swal.fire("status has been changed!"))
+    }
+
+    // axios.patch(`http://localhost:5000/purchaseServices/${id}`, data, {withCredentials: true})
+    //     .then(() => {
+    //         Swal.fire("status has been changed!");
+    //     })
 }
 return (
     <div>

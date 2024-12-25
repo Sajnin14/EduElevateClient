@@ -34,7 +34,7 @@ const SingleService = () => {
         }
 
         console.log(purchaseInfo);
-        axios.post('http://localhost:5000/purchaseServices', purchaseInfo)
+        axios.post('http://localhost:5000/purchaseServices', purchaseInfo, {withCredentials: true})
         .then(res =>{
             console.log(res.data);
             Swal.fire({

@@ -23,7 +23,7 @@ const Popular = () => {
             <h3 className="font-bold text-3xl my-2 text-center text-[#1E4463]"> Popular Deal</h3>
             <p className='italic text-center'>Buy your books at a budget friendly price</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-14">
+            <div className="w-5/6 mx-auto my-14">
                 {
                     topPopularData.map(service => <Services key={service._id} service={service}></Services>)
                 }

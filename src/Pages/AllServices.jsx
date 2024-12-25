@@ -15,14 +15,14 @@ const AllServices = () => {
     // console.log('result= ', result);
 
     const [loaderData, setLoaderData] = useState(result);
-    console.log(loaderData);
+    // console.log(loaderData);
     
     const [search, setSearch] = useState('');
 
     const handleSearch = e => {
         const value = e.target.value;
         setSearch(value);
-        console.log(search);
+        // console.log(search);
     }
     
     useEffect(() => {

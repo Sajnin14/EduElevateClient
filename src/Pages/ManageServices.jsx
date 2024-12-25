@@ -2,12 +2,9 @@ import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 import useTitle from "../AuthProvider/useTitle";
-import { Link} from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
@@ -28,7 +25,6 @@ const ManageServices = () => {
     }, [axiosSecure, user])
 
     const handleDelete = (id) => {
-        console.log('delete', id);
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -39,19 +35,35 @@ const ManageServices = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/allServices/${id}`)
-                    .then(res => {
-                        console.log(res.data);
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                        const remaining = manageServices.filter( manage => manage._id !== id);
+
+                if (user) {
+                    axiosSecure.delete(`/allServices/${id}`)
+                        .then(() => {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+
+                            const remaining = manageServices.filter( manage => manage._id !== id);
                         setManageServices(remaining);
 
-                        // navigate('/manageServices');
                     })
+                }
+
+                // axios.delete(`http://localhost:5000/allServices/${id}`, {withCredentials: true})
+                //     .then(res => {
+                //         console.log(res.data);
+                //         Swal.fire({
+                //             title: "Deleted!",
+                //             text: "Your file has been deleted.",
+                //             icon: "success"
+                //         });
+                //         const remaining = manageServices.filter( manage => manage._id !== id);
+                //         setManageServices(remaining);
+
+                //         // navigate('/manageServices');
+                //     })
 
             }
         });

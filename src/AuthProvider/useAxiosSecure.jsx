@@ -2,6 +2,7 @@ import axios from "axios";
 import UseAuth from "./UseAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const axiosInstances = axios.create({
     baseURL: 'http://localhost:5000',
@@ -25,7 +26,14 @@ const useAxiosSecure = () => {
                     console.log("logged out", res.user);
                     navigate('/signIn');
                 })
-                .catch(err => alert(err.message))
+                .catch(() => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: 'something went wrong',
+                        
+                      });
+                })
             }
             return Promise.reject(error);
 
