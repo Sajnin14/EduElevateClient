@@ -28,7 +28,7 @@ const Services = ({ service }) => {
 
                     <p className='font-semibold text-lg'>Price: {service.price} tk</p>
                     <p>{service.area}</p>
-                    <Link to={`/service/${service._id}`} className='btn bg-[#1E4463] text-base-100'>View Details</Link>
+                    <Link to={`/service/${service._id}`}> <button className='btn bg-[#1E4463] text-base-100'>View details</button></Link>
                 
             </div>
             

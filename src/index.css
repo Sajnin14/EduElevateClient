@@ -16,12 +16,14 @@
   :root[data-theme="dark"] h1, 
   :root[data-theme="dark"] h2, 
   :root[data-theme="dark"] h3,
-  :root[data-theme="dark"] button 
+  :root[data-theme="dark"] button,
+  :root[data-theme="dark"] Link
    {
     color: #ffffff;
   }
 
-  :root[data-theme="dark"] input {
+  :root[data-theme="dark"] input
+   {
     color: beige;
   }
   
