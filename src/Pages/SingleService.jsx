@@ -8,11 +8,7 @@ const SingleService = () => {
     const navigate = useNavigate();
     const loader = useLoaderData();
     const { user } = UseAuth();
-    console.log({ user });
     
-
-
-    console.log(loader._id);
     const handlePurchase = e => {
         e.preventDefault();
         const serviceDate = e.target.date.value;
@@ -33,10 +29,8 @@ const SingleService = () => {
             address
         }
 
-        console.log(purchaseInfo);
-        axios.post('http://localhost:5000/purchaseServices', purchaseInfo, {withCredentials: true})
-        .then(res =>{
-            console.log(res.data);
+        axios.post('https://server-side-taupe-beta.vercel.app/purchaseServices', purchaseInfo, {withCredentials: true})
+        .then(() =>{
             Swal.fire({
                 icon: "success",
                 title: "Your purchase hase been saved",

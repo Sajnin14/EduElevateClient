@@ -10,7 +10,6 @@ const UpdateService = () => {
     const loader = useLoaderData();
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
-    // console.log(loader);
 
     const handleUpdateService = (e) => {
         e.preventDefault();
@@ -41,8 +40,7 @@ const UpdateService = () => {
 
                 if (user) {
                     axiosSecure.patch(`/allServices/${loader._id}`, updatedata)
-                        .then(res => {
-                            console.log(res.data);
+                        .then(() => {
                             Swal.fire({
                                 title: "Updated!",
                                 text: "Your services has been updated.",
@@ -53,7 +51,7 @@ const UpdateService = () => {
                         })
                 }
 
-                // axios.patch(`http://localhost:5000/allServices/${loader._id}`, updatedata)
+                // axios.patch(`https://server-side-taupe-beta.vercel.app/allServices/${loader._id}`, updatedata)
                 //     .then(() => {
                 //         Swal.fire({
                 //             title: "Updated!",

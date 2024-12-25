@@ -10,14 +10,13 @@ const BookedServices = () => {
     const { user } = UseAuth();
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
-        // fetch(`http://localhost:5000/purchaseServices?email=${user.email}`)
+        // fetch(`https://server-side-taupe-beta.vercel.app/purchaseServices?email=${user.email}`)
         //     .then(res => res.json())
         //     .then(data => {
         //         setBookesdServices(data);
-        //         console.log(data);
         //     })
 
-        // axios.get(`http://localhost:5000/purchaseServices?email=${user.email}`, {withCredentials: true})
+        // axios.get(`https://server-side-taupe-beta.vercel.app/purchaseServices?email=${user.email}`, {withCredentials: true})
         // .then(res => {
         //     setBookesdServices(res.data);
         // })
@@ -33,11 +32,10 @@ const BookedServices = () => {
     //     axios.interceptors.response.use(response =>{
     //        return response;
     //     }, error => {
-    //         console.log('error from interceptor');
     //         if(error.status === 401 || error.status === 403){
     //            logOut()
     //            .then(() => {})
-    //            .catch(() => {console.log('error khao mia')})
+    //            .catch(() => {})
                
     //            navigate('/auth/login');
                
@@ -49,7 +47,7 @@ const BookedServices = () => {
     if (!bookedServices.length) {
         return (
             <div className="w-11/12 mx-auto h-72 bg-gray-300 flex items-center justify-center">
-                <p className="text-2xl font-bold text-red-700">No Services added by you</p>
+                <p className="text-2xl font-bold text-red-700">No services Booked/Purchase by you 😌</p>
             </div>
         )
     }

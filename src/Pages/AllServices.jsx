@@ -12,24 +12,19 @@ const AllServices = () => {
 
     // useEffect()
     const {result} = useLoaderData();
-    // console.log('result= ', result);
 
     const [loaderData, setLoaderData] = useState(result);
-    // console.log(loaderData);
-    
     const [search, setSearch] = useState('');
 
     const handleSearch = e => {
         const value = e.target.value;
         setSearch(value);
-        // console.log(search);
     }
     
     useEffect(() => {
-        axios.get(`http://localhost:5000/allServices?searchService=${search}`)
+        axios.get(`https://server-side-taupe-beta.vercel.app/allServices?searchService=${search}`)
             .then(res => {
                 setLoaderData(res.data.newResult);
-                // console.log(res.data.newResult);
             })
     }, [search])
 

@@ -28,8 +28,10 @@ const Register = () => {
             setUser(res.user);
             toast.success('successfully created new user', {position: "top-center"});
             updateUser({displayName: name, photoURL : photo})
-            .then(res => console.log(res.user))
-            .catch(err => console.log(err.code))
+            .then(() => {})
+            .catch(err => {
+                toast.error(err.message);
+            })
             setTimeout(() => {
                 navigate('/');
             }, 1000);
@@ -44,7 +46,6 @@ const Register = () => {
         .then(res => {
             setUser(res.user);
             toast.success('successfully register with google');
-            // console.log(res.user);
             navigate('/');
         })
     }

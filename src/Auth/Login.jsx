@@ -13,12 +13,10 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        // console.log(email, password);
         loginUser(email, password)
             .then(res => {
                 toast.success('successfully login', { position: 'top-center' });
                 setUser(res.user);
-                console.log(res.user);
                 setTimeout(() => {
                     navigate('/');
                 }, 1000);
@@ -35,7 +33,6 @@ const Login = () => {
                 toast('successfully register with google',
                     { position: 'top-center' }
                 );
-                console.log(res.user);
                 navigate('/');
             })
     }

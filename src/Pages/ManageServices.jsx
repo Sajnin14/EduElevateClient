@@ -51,9 +51,8 @@ const ManageServices = () => {
                     })
                 }
 
-                // axios.delete(`http://localhost:5000/allServices/${id}`, {withCredentials: true})
+                // axios.delete(`https://server-side-taupe-beta.vercel.app/allServices/${id}`, {withCredentials: true})
                 //     .then(res => {
-                //         console.log(res.data);
                 //         Swal.fire({
                 //             title: "Deleted!",
                 //             text: "Your file has been deleted.",

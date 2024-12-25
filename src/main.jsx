@@ -41,12 +41,12 @@ const router = createBrowserRouter([
       {
         path: '/services',
         element: <AllServices></AllServices>,
-        loader: () => fetch('http://localhost:5000/allServices', {credentials: 'include'})
+        loader: () => fetch('https://server-side-taupe-beta.vercel.app/allServices')
       },
       {
         path: '/service/:id',
         element: <PrivateRoute><SingleService></SingleService></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/allServices/${params.id}`, {credentials: 'include'})
+        loader: ({ params }) => fetch(`https://server-side-taupe-beta.vercel.app/allServices/${params.id}`, {credentials: 'include'})
 
       },
       {
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: '/updateService/:id',
         element: <PrivateRoute><UpdateService></UpdateService></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/allServices/${params.id}`, {credentials: 'include'})
+        loader: ({params}) => fetch(`https://server-side-taupe-beta.vercel.app/allServices/${params.id}`, {credentials: 'include'})
       },
       {
         path: '/bookedServices',

@@ -69,19 +69,17 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             if (currentUser?.email) {
                 const user = { email: currentUser.email };
-                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
-                    .then(res => {
-                        console.log(res.data);
+                axios.post('https://server-side-taupe-beta.vercel.app/jwt', user, { withCredentials: true })
+                    .then(() => {
                         setLoading(false);
                     })
             }
 
             else {
-                axios.post('http://localhost:5000/logout', {}, {
+                axios.post('https://server-side-taupe-beta.vercel.app/logout', {}, {
                     withCredentials: true
                 })
-                    .then(res => {
-                        console.log(res.data);
+                    .then(() => {
                         setLoading(false);
                     })
             }

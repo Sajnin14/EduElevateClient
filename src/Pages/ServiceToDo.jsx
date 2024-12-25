@@ -13,13 +13,13 @@ const ServiceToDo = () => {
     const { user } = UseAuth();
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
-        // axios.get(`http://localhost:5000/purchaseServices/service/${user.email}`, {withCredentials: true})
+        // axios.get(`https://server-side-taupe-beta.vercel.app/purchaseServices/service/${user.email}`, {withCredentials: true})
         // .then(res => {
         //     setServiceToDo(res.data)
         // })
 
         if (user) {
-            axiosSecure.get(`/purchaseServices/service/${user.email}`)
+            axiosSecure.get(`/purchaseServices/serviceProvider/${user.email}`)
                 .then(res => setServiceToDo(res.data))
         }
     }, [axiosSecure, user])
@@ -28,11 +28,10 @@ const ServiceToDo = () => {
 //     axios.interceptors.response.use(response =>{
 //        return response;
 //     }, error => {
-//         console.log('error from interceptor');
 //         if(error.status === 401 || error.status === 403){
 //            logOut()
 //            .then(() => {})
-//            .catch(() => {console.log('error khao mia')})
+//            .catch(() => {)
 
 //            navigate('/auth/login');
 
@@ -45,7 +44,6 @@ const ServiceToDo = () => {
 const handleStatus = (e, id) => {
     e.preventDefault();
     const value = e.target.value;
-    console.log(value, id);
     const data = {
         serviceStatus: value
     }
@@ -55,7 +53,7 @@ const handleStatus = (e, id) => {
             .then(() => Swal.fire("status has been changed!"))
     }
 
-    // axios.patch(`http://localhost:5000/purchaseServices/${id}`, data, {withCredentials: true})
+    // axios.patch(`https://server-side-taupe-beta.vercel.app/purchaseServices/${id}`, data, {withCredentials: true})
     //     .then(() => {
     //         Swal.fire("status has been changed!");
     //     })

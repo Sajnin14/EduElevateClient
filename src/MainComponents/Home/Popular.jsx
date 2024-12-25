@@ -8,13 +8,13 @@ const Popular = () => {
     const [popular, setPopular] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/allServices')
+        axios.get('https://server-side-taupe-beta.vercel.app/allServices')
             .then(res => {
                 setPopular(res.data.result);
             })
     }, [])
 
-    const topPopularData = popular.sort((a, b) => b.price - a.price).slice(0, 4);
+    const topPopularData = popular.sort((a, b) => a.price - b.price).slice(0, 4);
 
 
     return (
