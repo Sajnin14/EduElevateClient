@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
-import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 import useTitle from "../AuthProvider/useTitle";
+import useAxiosSecure from "../AuthProvider/useAxiosSecure";
 
 
 const BookedServices = () => {
@@ -9,12 +9,8 @@ const BookedServices = () => {
     const [bookedServices, setBookesdServices] = useState([]);
     const { user } = UseAuth();
     const axiosSecure = useAxiosSecure();
+
     useEffect(() => {
-        // fetch(`https://server-side-taupe-beta.vercel.app/purchaseServices?email=${user.email}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         setBookesdServices(data);
-        //     })
 
         // axios.get(`https://server-side-taupe-beta.vercel.app/purchaseServices?email=${user.email}`, {withCredentials: true})
         // .then(res => {

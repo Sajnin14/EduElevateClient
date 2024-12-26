@@ -29,7 +29,7 @@ const Banner = () => {
                             A platform that enhances learning through resources like books and tools, designed to inspire and empower learners of all ages.
                         </p>
                         <p className="text-[#788FA1]">Explore a world of knowledge with our collection of new and pre-loved books, spanning various genres and subjects. Enhance your learning journey with our expertly designed courses, tailored to help you gain valuable skills and achieve your goals. Your one-stop destination for books and education!</p>
-                        {/* <button className="btn btn-primary">Get Started</button> */}
+                        
                     </div>
                 </div>
             </div>

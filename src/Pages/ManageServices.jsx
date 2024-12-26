@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
 import { FiEdit } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
-import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 import useTitle from "../AuthProvider/useTitle";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../AuthProvider/useAxiosSecure";
 
 
 const ManageServices = () => {
@@ -50,19 +50,6 @@ const ManageServices = () => {
 
                     })
                 }
-
-                // axios.delete(`https://server-side-taupe-beta.vercel.app/allServices/${id}`, {withCredentials: true})
-                //     .then(res => {
-                //         Swal.fire({
-                //             title: "Deleted!",
-                //             text: "Your file has been deleted.",
-                //             icon: "success"
-                //         });
-                //         const remaining = manageServices.filter( manage => manage._id !== id);
-                //         setManageServices(remaining);
-
-                //         // navigate('/manageServices');
-                //     })
 
             }
         });

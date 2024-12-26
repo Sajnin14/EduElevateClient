@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../AuthProvider/UseAuth";
-import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 import useTitle from "../AuthProvider/useTitle";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../AuthProvider/useAxiosSecure";
 
 
 const ServiceToDo = () => {
@@ -13,32 +13,12 @@ const ServiceToDo = () => {
     const { user } = UseAuth();
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
-        // axios.get(`https://server-side-taupe-beta.vercel.app/purchaseServices/service/${user.email}`, {withCredentials: true})
-        // .then(res => {
-        //     setServiceToDo(res.data)
-        // })
-
+    
         if (user) {
             axiosSecure.get(`/purchaseServices/serviceProvider/${user.email}`)
                 .then(res => setServiceToDo(res.data))
         }
     }, [axiosSecure, user])
-
-// useEffect(() =>{
-//     axios.interceptors.response.use(response =>{
-//        return response;
-//     }, error => {
-//         if(error.status === 401 || error.status === 403){
-//            logOut()
-//            .then(() => {})
-//            .catch(() => {)
-
-//            navigate('/auth/login');
-
-//         }
-//        return Promise.reject(error);
-//     })
-// },[logOut, navigate])
 
 
 const handleStatus = (e, id) => {

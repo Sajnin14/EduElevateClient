@@ -1,8 +1,8 @@
 // import axios from "axios";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../AuthProvider/UseAxiosSecure";
 import UseAuth from "../AuthProvider/UseAuth";
+import useAxiosSecure from "../AuthProvider/useAxiosSecure";
 
 
 const UpdateService = () => {
@@ -51,15 +51,6 @@ const UpdateService = () => {
                         })
                 }
 
-                // axios.patch(`https://server-side-taupe-beta.vercel.app/allServices/${loader._id}`, updatedata)
-                //     .then(() => {
-                //         Swal.fire({
-                //             title: "Updated!",
-                //             text: "Your services has been updated.",
-                //             icon: "success"
-                //         });
-                //         navigate('/manageServices')
-                //     })
             }
         });
 

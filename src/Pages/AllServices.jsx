@@ -8,9 +8,6 @@ import axios from "axios";
 
 const AllServices = () => {
     useTitle('Books');
-    // const [loader, setloader] = useState();
-
-    // useEffect()
     const {result} = useLoaderData();
 
     const [loaderData, setLoaderData] = useState(result);

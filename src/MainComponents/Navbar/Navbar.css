@@ -1,3 +1,10 @@
 Navlink link{
     margin: 0 4px;
 }
+
+.active {
+    background-color: #1E4463;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
