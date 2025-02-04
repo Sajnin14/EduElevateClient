@@ -26,12 +26,12 @@ Features:
              things as we provided youtube link also.
 
 Technologies Used: 
-         JavaScript, React
-         State Management: React Context-API
-         UI Library: Tailwind CSS
-         Backend: Firebase, Node.js
-         Database: MongoDB
-         Routing: React Router
+         JavaScript, React,
+         State Management: React Context-API,
+         UI Library: Tailwind CSS,
+         Backend: Firebase, Node.js,
+         Database: MongoDB,
+         Routing: React Router.
 
          
 Dependencies:  firebase, jsonWebToken, react-router-dom, axios, tailwind CSS, framer motion, react-icons, sweetalert, react-helmet, lottie-react
